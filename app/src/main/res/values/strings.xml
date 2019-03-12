@@ -1,0 +1,64 @@
+<resources>
+    <string name="app_name" translatable="false">CloudPayments Demo</string>
+
+    <string name="store_name" translatable="false">My Online Store</string>
+    <string name="pwg_status_unavailable" translatable="false">Unfortunately, Pay with Google is not available on this phone.</string>
+    <string name="pwg_status_checking" translatable="false">Checking if Pay with Google is available...</string>
+    <string name="payments_show_name" translatable="false">Successfully received payment data for %s!</string>
+
+    <string name="pay_with_google_content_description" translatable="false">Оплатить через Google</string>
+
+    <!-- Dialog -->
+    <string name="dialog_loading_title" translatable="false">Загрузка данных</string>
+    <string name="dialog_loading_content" translatable="false">Пожалуйста, подождите…</string>
+    <string name="dialog_not_authorized" translatable="false">Для этого действия необходима авторизация</string>
+    <string name="dialog_server_is_not_available" translatable="false">Сервер недоступен</string>
+
+    <!-- Common -->
+    <string name="common_no_internet_connection" translatable="false">Отсутствует соединение с интернетом</string>
+
+    <!-- Main Activity -->
+    <string name="main_title" translatable="false">CloudPayments</string>
+    <string name="main_description" translatable="false">Посмотрите, как выглядят платежи через CloudPayments для покупателей в мобильном приложении. Выберите товары, которые нужно приобрести. Товары не настоящие, платежи тоже — деньги тратить не придется.</string>
+    <string name="main_add_to_cart" translatable="false">В корзину</string>
+    <string name="main_phone" translatable="false">+7 495 374-78-60</string>
+    <string name="main_email" translatable="false">sales@cloudpayments.ru</string>
+    <string name="main_select_app" translatable="false">Выберите приложение</string>
+    <string name="main_cart_is_empty" translatable="false">Ваша корзина пуста добавьте один или несколько товаров чтобы продолжить.</string>
+    <string name="main_product_added_to_cart" translatable="false">Товар добавлен в корзину.</string>
+    <string name="main_rub" translatable="false">Руб.</string>
+
+    <string name="menu_one_stage_payment" translatable="false">Одностадийная оплата</string>
+    <string name="menu_two_stage_payment" translatable="false">Двухстадийная оплата</string>
+
+
+    <!-- Cart Activity -->
+    <string name="cart_title" translatable="false">Корзина</string>
+    <string name="cart_total" translatable="false">Итого:</string>
+    <string name="cart_go_to_payment" translatable="false">Перейти к оплате</string>
+
+    <!-- Checkout Activity -->
+    <string name="checkout_title" translatable="false">Оплата</string>
+    <string name="checkout_description" translatable="false">Так выглядят платежи через CloudPayments для покупателей в мобильном приложении. Платеж тестовый — деньги тратить не придется. Мы не ограничиваем своих клиентов в использовании какой либо определенной формы для ввода карточных данных, вы можете создать любую форму которая будет полностью соответсвовать дизайну вашего приложения.</string>
+    <string name="checkout_total" translatable="false">Всего к оплате:</string>
+    <string name="checkout_card_number" translatable="false">Номер карты</string>
+    <string name="checkout_card_date" translatable="false">MM/YY</string>
+    <string name="checkout_card_cvc" translatable="false">CVC</string>
+    <string name="checkout_card_holder" translatable="false">Владелец карты</string>
+    <string name="checkout_payment" translatable="false">Оплатить</string>
+
+    <!-- Checkout -->
+    <string name="checkout_1_rub" translatable="false">ВНИМАНИЕ!\nВ режиме PRODUCTION с вашей банковской карты будет списан 1 рубль!</string>
+    <string name="checkout_caption" translatable="false">Вы можете провести оплату введя данные банковской карты или используя Google Pay если этот сервис доступен на Вашем устройстве</string>
+    <string name="checkout_card_exp" translatable="false">Срок действия в формате: MMYY</string>
+    <string name="checkout_card_holder_name" translatable="false">Имя владельца</string>
+    <string name="checkout_card_cvv" translatable="false">CVV код</string>
+    <string name="checkout_pay" translatable="false">Оплатить</string>
+    <string name="checkout_or" translatable="false">или</string>
+
+    <string name="checkout_error_card_number" translatable="false">Номер карты некорректен</string>
+    <string name="checkout_error_card_date" translatable="false">Срок действитя некорректен либо истек</string>
+    <string name="checkout_error_card_cvc" translatable="false">Некорректный CVC код</string>
+
+    <string name="checkout_error_crypto" translatable="false">Невозможно создать криптограмму проверьте данные карты</string>
+</resources>

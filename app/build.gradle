@@ -1,0 +1,78 @@
+apply plugin: 'com.android.application'
+
+android {
+
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "ru.cloudpayments.demo"
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+    }
+
+    configurations {
+        all*.exclude group: 'com.android.support', module: 'support-v13'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    useLibrary 'org.apache.http.legacy'
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+
+    // gPay
+    implementation 'com.google.android.gms:play-services-wallet:16.0.1'
+
+    // CloudPayments SDK
+    implementation project(':sdk')
+
+    // views binding
+    implementation 'com.jakewharton:butterknife:10.1.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+
+    // material dialogs
+    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+
+    // rx
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.7'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
+    // http
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.13.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.13.1'
+
+    // event bus
+    implementation 'org.greenrobot:eventbus:3.1.1'
+
+    // image loading and caching
+    //implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'jp.wasabeef:glide-transformations:4.0.1'
+
+    // image cropping
+    //implementation 'com.theartofdev.edmodo:android-image-cropper:2.3.1'
+}
