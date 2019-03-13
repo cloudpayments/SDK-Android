@@ -1,78 +1,180 @@
-# Использование  
+# CloudPayments SDK for Android 
 
-Приложение CloudPayments Checkout Example демонстрирует работу Android приложения с платежным шлюзом CloudPayments, а так же работу с Google Pay.
+CloudPayments SDK позволяет интегрировать прием платежей в мобильные приложение для платформы Android.
 
-Схемы проведения платежа http://cloudpayments.ru/Docs/Integration#schemes
+### Схема проведения платежа:
+![Схема проведения платежа](https://cloudpayments.ru/storage/SNbUKmXtE1XgZoL7ypOSJBTFKvRpfMaWtWiNI51U.png)
 
-## Инсталяция
-git clone https://github.com/cloudpayments/CloudPayments_AndroidCheckout.git
+### Структура проекта:
 
-## Описание работы приложения с SDK CloudPayments
+* **api/** - Пример файлов для проведения платежа через ваш сервер
+* **app/** - Пример реализации приложения с использованием SDK
+* **sdk/** - Исходный код SDK
 
-SDK CloudPayments позволяет:
+### Требования
+Для работы CloudPayments SDK необходим Android версии 4.0.3 (API level 15) и выше.
 
-* Проводить проверку карточного номера на корректность
-
-```
-Card card = CardFactory.create(String number);
-boolean card.isValidNumber();
-
-```
-
-* Определять тип платежной системы
+### Добавление SDK в ваш проект
+Для подключения CloudPayments SDK добавьте в файл build.gradle вашего проекта следующую зависимость:
 
 ```
+implementation 'ru.cloudpayments.android:sdk:1.0.0'
+```
 
-Card card = CardFactory.create(java.lang.String number);
+### Подготовка к работе
+
+Для начала приема платежей через мобильные приложения вам понадобятся:
+
+* Public ID
+* Пароль для API (**Важно:** Не храните пароль для API в приложении, выполняйте запросы через сервер согласно схемы проведения платежа)
+
+Эти данные можно получить в личном кабинете: [https://merchant.cloudpayments.ru/](https://merchant.cloudpayments.ru/) после подключения к [CloudPayments](https://cloudpayments.ru/).
+
+### Возможности CloudPayments SDK:
+
+* Проверка карточного номера на корректность
+
+```
+boolean CPCard.isValidNumber(String cardNumber);
+
+```
+
+* Проверка срока действия карты
+
+```
+boolean CPCard.isValidExpDate(String cardDate); // cardDate в формате MMYY
+
+```
+
+* Определение типа платежной системы
+
+```
+CPCard card = new CPCard(String cardNumber, String cardDate, String cardCVC);
 String card.getType();
 
 ```
 
-* Шифровать карточные данные и создавать криптограмму для отправки на сервер
+* Шифрование карточных данных и создание криптограммы для отправки на сервер
 
 ```
-
-Card card = CardFactory.create(String number);
+CPCard card = new CPCard(String cardNumber, String cardDate, String cardCVC);
 String card.cardCryptogram(String publicId);
 
 ```
-## Подключение Google Pay API для клиентов CloudPayments
 
-https://cloudpayments.ru/docs/googlepay - о Google Pay
+* Отображение 3DS формы и получении результата 3DS аутентификации
 
-[https://developers.google.com/payments/setup](https://developers.google.com/payments/setup) \- документация Google, по подключению Google Pay API в приложение.
+```
+ThreeDsDialogFragment.newInstance(transaction.getAcsUrl(),
+                String transactionId,
+                String paReq)
+                .show(getSupportFragmentManager(), "3DS");
+```
 
-[https://github.com/android-pay/paymentsapi-quickstart](https://github.com/android-pay/paymentsapi-quickstart) -  пример использования Google Pay API от Google.
+### Пример проведения платежа:
 
-ВАЖНО:
+#### 1) Создание криптограммы
 
-При формирования параметров для запроса токена необходимо указать тип оплаты через шлюз (Wallet-Constants.PAYMENT\_METHOD\_TOKENIZATION\_TYPE\_PAYMENT_GATEWAY) и добавить два параметра:
+```
+// Обязательно проверяйте входящие данные карты (номер, срок действия и cvc код) на корректность, иначе при попытке создания объекта CPCard мы получим исключение.
+CPCard card = new CPCard(String cardNumber, String cardDate, String cardCVC);
+String card.cardCryptogram(String publicId);
 
-1) gateway: cloudpayments
-2) gatewayMerchantId: Ваш Public ID, его можно посмотреть в личном в Личном кабинете: [https://merchant.cloudpayments.ru/](https://merchant.cloudpayments.ru/)
+```
+
+#### 2) Выполнение запроса на проведения платежа через  API CloudPayments
+
+Первичный платёж - [оплата по криптограмме](https://cloudpayments.ru/wiki/integration/instrumenti/api#pay_with_crypto)
+
+**Криптограмму согласно требованиям PCIDSS разрешено использовать только единоразово. Хранить её на сервере строго запрещается.** 
+
+Для последующих платежей "в один клик" (привязка карты) используйте 
+[оплату по токену](https://cloudpayments.ru/wiki/integration/instrumenti/api#paywithtoken).  
+Токен можно получить при совершении оплаты по криптограмме, либо при получении  [уведомлений](https://cloudpayments.ru/wiki/integration/instrumenti/notice).
+
+**Запросы необходимо выполнять через свой сервер, согласно схемы проведения платежа: При помощи SDK создать криптограмму карточных данных, отправить данные на свой сервер и со своего сервера выполнить запрос к платежному API CloudPayments**
+
+
+#### 3) Если необходимо, показать 3DS форму для подтверждения платежа
+
+```
+ThreeDsDialogFragment.newInstance(transaction.getAcsUrl(),
+                String transactionId,
+                String paReq)
+                .show(getSupportFragmentManager(), "3DS");
+```
+
+Для получения результатов прохождения 3DS аутентификации реализуйте интерефейс ThreeDSDialogListener в Activity из которой происходит создание и отображение ThreeDsDialogFragment.
+
+```
+public class CheckoutActivity implements ThreeDSDialogListener {
+...
+  @Override
+    public void onAuthorizationCompleted(String md, String paRes) {
+        post3ds(md, paRes); // Успешное прохождение аутентификации, для завершения оплаты выполните запрос API post3ds
+    }
+
+    @Override
+    public void onAuthorizationFailed(String html) {
+        showToast("AuthorizationFailed"); // Неудалось пройти аутентификацию, отобразите ошибку.
+    }
+}
+```
+
+### Подключение Google Pay  через CloudPayments
+
+[О Google Pay](https://cloudpayments.ru/wiki/integration/products/googlepay)
+
+[Документация](https://developers.google.com/payments/setup)
+
+[Пример использования Google Pay API от Google](https://github.com/android-pay/paymentsapi-quickstart)
+
+#### Включение Google Pay 
+
+В файл build.gradle подключите следующую зависимость:
+
+```
+implementation 'com.google.android.gms:play-services-wallet:16.0.1'
+```
+
+В файл манифест приложения добавьте мета информацию:
+
+```
+<meta-data
+            android:name="com.google.android.gms.wallet.api.enabled"
+            android:value="true" />
+```
+
+#### Проведение платежа через Google Pay  
+
+Сконфигурируйте параметры:
 
 ```
 PaymentMethodTokenizationParameters  params =
-PaymentMethodTokenizationParameters.newBuilder()
-.setPaymentMethodTokenizationType(
-WalletConstants.PAYMENT\_METHOD\_TOKENIZATION\_TYPE\_PAYMENT_GATEWAY)
-.addParameter("gateway", "cloudpayments")
-.addParameter("gatewayMerchantId", "Ваш Public ID")
-.build();
+		PaymentMethodTokenizationParameters.newBuilder()
+				.setPaymentMethodTokenizationType(
+				WalletConstants.PAYMENT_METHOD_TOKENIZATION_TYPE_PAYMENT_GATEWAY)
+				.addParameter("gateway", "cloudpayments")
+				.addParameter("gatewayMerchantId", "Ваш Public ID")
+				.build();
 ```
 
-После получения токена необходимо провести оплату:
-String token = paymentData.getPaymentMethodToken().getToken();
+Укажите тип оплаты через шлюз (Wallet-Constants.PAYMENT_METHOD_TOKENIZATION_TYPE_PAYMENT_GATEWAY) и добавьте два параметра:
 
-## Проведение оплаты
+1) gateway: cloudpayments
 
-В примере MERCHANT\_PUBLIC\_ID и MERCHANT\_API\_PASS это тестовые Public ID и пароль для API, Вам необходимо получить свои данные в личном кабинете на сайте CloudPayments.
-Не храните пароль для API в мобильном приложении это не безопасно, приложение должно выполнять запросы согласно схеме через ваш сервер: https://cloudpayments.ru/Docs/MobileSDK
+2) gatewayMerchantId: Ваш Public ID, его можно посмотреть в [личном кабинете](https://merchant.cloudpayments.ru/).
 
-1) В приложении необходимо получить  токен от Google Pay либо получить карточные данные и создать на из основе криптограмму (токен уже является криптограммой каких либо модификаций с ним проводить нет необходимости);
-2) Отправить криптограмму (токен) и все данные для платежа с мобильного устройства на ваш сервер; 
-3) С сервера вашего сервера провести оплату через платежное API CloudPayments.
+С этими параметрами запросите токен Google Pay:
 
-## Ключевые моменты
+```
+String tokenGP = paymentData.getPaymentMethodToken().getToken();
+```
 
-В демо-проекте частично используется код из библиотеки https://github.com/LivotovLabs/3DSView. Все права на код этой библиотеки принадлежат авторам библиотеки.
+Используя токен Google Pay в качестве криптограммы карточных данных, совершите платёж  методами API, указанными ранее.
+
+**В случае проведения платежа с токеном Google Pay в качестве имени держателя карты неоходимо указать: "Google Pay"**
+
+### Поддержка
+
+Просьба, по возникающим вопросам техничечкого характера обращаться на support@cloudpayments.ru
