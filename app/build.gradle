@@ -46,7 +46,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-wallet:16.0.1'
 
     // CloudPayments SDK
-    implementation project(':sdk')
+    implementation 'ru.cloudpayments.android:sdk:1.0.0'
 
     // views binding
     implementation 'com.jakewharton:butterknife:10.1.0'
@@ -70,9 +70,5 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.1.1'
 
     // image loading and caching
-    //implementation 'com.github.bumptech.glide:glide:3.7.0'
     implementation 'jp.wasabeef:glide-transformations:4.0.1'
-
-    // image cropping
-    //implementation 'com.theartofdev.edmodo:android-image-cropper:2.3.1'
 }
