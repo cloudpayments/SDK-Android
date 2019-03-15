@@ -88,7 +88,7 @@ String card.cardCryptogram(String publicId);
 
 #### 2) Выполнение запроса на проведения платежа через  API CloudPayments
 
-Платёж - [оплата по криптограмме](https://cloudpayments.ru/wiki/integration/instrumenti/api#pay_with_crypto)
+Платёж - [оплата по криптограмме](https://cloudpayments.ru/wiki/integration/instrumenti/api#pay_with_crypto).
 
 Для привязки карты (платёж "в один клик")  используйте метод
 [оплату по токену](https://cloudpayments.ru/wiki/integration/instrumenti/api#paywithtoken).  
