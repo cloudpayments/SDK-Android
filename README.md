@@ -16,7 +16,7 @@ CloudPayments SDK позволяет интегрировать прием пл�
 Для подключения CloudPayments SDK добавьте в файл build.gradle вашего проекта следующую зависимость:
 
 ```
-implementation 'ru.cloudpayments.android:sdk:1.0.0'
+implementation 'ru.cloudpayments.android:sdk:1.0.1'
 ```
 ### Структура проекта:
 
@@ -72,7 +72,7 @@ String card.cardCryptogram(String publicId);
 ThreeDsDialogFragment.newInstance(transaction.getAcsUrl(),
                 String transactionId,
                 String paReq)
-                .show(getSupportFragmentManager(), "3DS");
+                .show(getFragmentManager(), "3DS");
 ```
 
 ### Пример проведения платежа:
@@ -102,7 +102,7 @@ String card.cardCryptogram(String publicId);
 ThreeDsDialogFragment.newInstance(transaction.getAcsUrl(),
                 String transactionId,
                 String paReq)
-                .show(getSupportFragmentManager(), "3DS");
+                .show(getFragmentManager(), "3DS");
 ```
 
 Для получения результатов прохождения 3DS аутентификации реализуйте интерефейс ThreeDSDialogListener в Activity из которой происходит создание и отображение ThreeDsDialogFragment.
