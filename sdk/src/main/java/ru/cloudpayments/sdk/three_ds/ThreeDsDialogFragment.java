@@ -150,10 +150,12 @@ public class ThreeDsDialogFragment extends DialogFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        try {
+        if (context instanceof ThreeDSDialogListener && listener == null)
             listener = (ThreeDSDialogListener) context;
-        } catch (ClassCastException e) {
-            e.printStackTrace();
-        }
     }
+
+    public void setListener(ThreeDSDialogListener listener) {
+        this.listener = listener;
+    }
+
 }
