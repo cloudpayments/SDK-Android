@@ -1,0 +1,7 @@
+*.iml
+/local.properties
+/.*
+/build
+/captures
+!.gitignore
+.directory
