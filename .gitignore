@@ -1,3 +1,7 @@
-.idea
-local.properties
 *.iml
+/local.properties
+/.*
+/build
+/captures
+!.gitignore
+.directory
