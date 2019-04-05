@@ -1,6 +1,5 @@
 package ru.cloudpayments.sdk.three_ds;
 
-import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,6 +20,7 @@ import org.jsoup.nodes.Element;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
+import androidx.fragment.app.DialogFragment;
 import ru.cloudpayments.sdk.R;
 
 public class ThreeDsDialogFragment extends DialogFragment {
