@@ -132,7 +132,7 @@ public class CPCard {
      * @return
      */
     public boolean isValidExpDate() {
-        return isValidNumber(expDate);
+        return isValidExpDate(expDate);
     }
 
     /**
