@@ -7,8 +7,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 3
-        versionName "1.0.2"
+        versionCode 4
+        versionName "1.0.3"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -26,7 +26,7 @@ dependencies {
 
     implementation 'com.android.support:appcompat-v7:28.0.0'
 
-    implementation 'org.jsoup:jsoup:1.8.3'
+    implementation 'org.jsoup:jsoup:1.11.3'
     implementation 'com.google.code.gson:gson:2.8.5'
 }
 
@@ -36,7 +36,7 @@ publish {
     groupId = 'ru.cloudpayments.android'
     repoName = 'sdk'
     artifactId = 'sdk'
-    publishVersion = '1.0.2'
+    publishVersion = '1.0.3'
     desc = 'CloudPayments SDK for Android'
     website = 'https://github.com/cloudpayments/SDK-Android'
 }

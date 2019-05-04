@@ -1,7 +1,9 @@
 package ru.cloudpayments.sdk.three_ds;
 
+import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -150,10 +152,20 @@ public class ThreeDsDialogFragment extends DialogFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        try {
+        if (context instanceof ThreeDSDialogListener) {
             listener = (ThreeDSDialogListener) context;
-        } catch (ClassCastException e) {
-            e.printStackTrace();
+        }
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            if (activity instanceof ThreeDSDialogListener) {
+                listener = (ThreeDSDialogListener) activity;
+            }
         }
     }
 }
