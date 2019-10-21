@@ -94,6 +94,7 @@ public class CPCard {
         boolean res = false;
         int sum = 0;
         int i;
+        number = prepareCardNumber(number);
         if (TextUtils.isEmpty(number)) {
             return false;
         }
@@ -199,6 +200,7 @@ public class CPCard {
             NoSuchPaddingException, NoSuchAlgorithmException, BadPaddingException,
             IllegalBlockSizeException, InvalidKeyException {
 
+        cardNumber = prepareCardNumber(cardNumber);
         String shortNumber = cardNumber.substring(0, 6) + cardNumber.substring(cardNumber.length() - 4, cardNumber.length());
         String exp = cardExp.substring(2, 4) + cardExp.substring(0, 2);
         String s = cardNumber + "@" + exp + "@" + cardCvv + "@" + publicId;
@@ -217,6 +219,10 @@ public class CPCard {
             crypto64 += cr_array[i];
         }
         return crypto64;
+    }
+
+    private static String prepareCardNumber(String cardNumber) {
+        return cardNumber.replaceAll("\\s", "");
     }
 
     private static PublicKey getRSAKey() {

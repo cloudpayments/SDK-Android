@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -350,6 +351,7 @@ public class CheckoutActivity extends BaseActivity implements ThreeDSDialogListe
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case LOAD_PAYMENT_DATA_REQUEST_CODE:
                 switch (resultCode) {
