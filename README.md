@@ -88,12 +88,12 @@ String card.cardCryptogram(String publicId);
 
 #### 2) Выполнение запроса на проведения платежа через  API CloudPayments
 
-Платёж - [оплата по криптограмме](https://cloudpayments.ru/wiki/integration/instrumenti/api#pay_with_crypto).
+Платёж - [оплата по криптограмме](https://developers.cloudpayments.ru/#oplata-po-kriptogramme).
 
 Для привязки карты (платёж "в один клик")  используйте метод
-[оплату по токену](https://cloudpayments.ru/wiki/integration/instrumenti/api#paywithtoken).  
+[оплату по токену](https://developers.cloudpayments.ru/#oplata-po-tokenu-rekarring).  
 
-Токен можно получить при совершении оплаты по криптограмме, либо при получении  [уведомлений](https://cloudpayments.ru/wiki/integration/instrumenti/notice).
+Токен можно получить при совершении оплаты по криптограмме, либо при получении  [уведомлений](https://developers.cloudpayments.ru/#uvedomleniya).
 
 
 #### 3) Если необходимо, показать 3DS форму для подтверждения платежа
@@ -121,6 +121,10 @@ public class CheckoutActivity implements ThreeDSDialogListener {
     }
 }
 ```
+
+#### 4) Для завершения оплаты выполнить метод Post3ds
+
+Смотрим документацию по API: Платёж - [оплата по криптограмме](https://developers.cloudpayments.ru/#oplata-po-kriptogramme).
 
 ### Подключение Google Pay  через CloudPayments
 
