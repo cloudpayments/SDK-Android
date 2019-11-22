@@ -46,8 +46,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-wallet:18.0.0'
 
     // CloudPayments SDK
-    implementation 'ru.cloudpayments.android:sdk:1.0.4'
-    //implementation project(':sdk')
+    implementation 'ru.cloudpayments.android:sdk:1.0.5'
+    //implementation project(path: ':sdk')
 
     // views binding
     implementation 'com.jakewharton:butterknife:10.1.0'

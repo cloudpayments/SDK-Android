@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +43,7 @@ import ru.cloudpayments.demo.managers.CartManager;
 import ru.cloudpayments.demo.models.Product;
 import ru.cloudpayments.demo.support.Constants;
 import ru.cloudpayments.sdk.cp_card.CPCard;
+import ru.cloudpayments.sdk.cp_card.api.CPCardApi;
 import ru.cloudpayments.sdk.three_ds.ThreeDSDialogListener;
 import ru.cloudpayments.sdk.three_ds.ThreeDsDialogFragment;
 
@@ -212,6 +212,15 @@ public class CheckoutActivity extends BaseActivity implements ThreeDSDialogListe
         String cardDate = editTextCardDate.getText().toString().replace("/", "");
         String cardCVC = editTextCardCVC.getText().toString();
         String cardHolderName = editTextCardHolderName.getText().toString();
+
+        CPCardApi api = new CPCardApi(this);
+
+        // Пример определения банка по номеру карты
+        api.getBinInfo(cardNumber, binInfo -> {
+            Log.d("Bank name", binInfo.getBankName());
+        }, message -> {
+            Log.e("Error", message);
+        });
 
         // Проверям номер карты.
         if (!CPCard.isValidNumber(cardNumber)) {

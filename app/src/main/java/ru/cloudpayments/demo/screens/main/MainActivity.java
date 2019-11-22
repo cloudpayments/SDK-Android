@@ -3,9 +3,10 @@ package ru.cloudpayments.demo.screens.main;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.recyclerview.widget.GridLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -105,4 +106,6 @@ public class MainActivity extends BaseListActivity<ProductsAdapter> implements P
                     adapter.update(products);
                 }, this::handleError));
     }
+
+
 }
