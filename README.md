@@ -16,7 +16,7 @@ CloudPayments SDK позволяет интегрировать прием пл�
 Для подключения CloudPayments SDK добавьте в файл build.gradle вашего проекта следующую зависимость:
 
 ```
-implementation 'ru.cloudpayments.android:sdk:1.0.4'
+implementation 'ru.cloudpayments.android:sdk:1.0.5'
 ```
 ### Структура проекта:
 
@@ -55,6 +55,21 @@ boolean CPCard.isValidExpDate(String cardDate); // cardDate в формате MM
 ```
 CPCard card = new CPCard(String cardNumber, String cardDate, String cardCVC);
 String card.getType();
+
+```
+
+* Определение банка эмитента
+
+```
+CPCardApi api = new CPCardApi(this);
+
+        // Пример определения банка по номеру карты
+        api.getBinInfo(cardNumber, binInfo -> {
+            binInfo.getBankName(); // Название банка
+            binInfo.getLogoUrl(); // URL картинки логотипа банка
+        }, message -> {
+            Log.e("Error", message);
+        });
 
 ```
 
