@@ -20,9 +20,9 @@ implementation 'ru.cloudpayments.android:sdk:1.0.5'
 ```
 ### Структура проекта:
 
-* **api/** - Пример файлов для проведения платежа через ваш сервер
-* **app/** - Пример реализации приложения с использованием SDK
-* **sdk/** - Исходный код SDK
+* **api** - Пример файлов для проведения платежа через ваш сервер
+* **app** - Пример реализации приложения с использованием SDK
+* **sdk** - Исходный код SDK
 
 
 ### Подготовка к работе
@@ -139,7 +139,7 @@ public class CheckoutActivity implements ThreeDSDialogListener {
 
 #### 4) Для завершения оплаты выполнить метод Post3ds
 
-Смотрим документацию по API: Платёж - [оплата по криптограмме](https://developers.cloudpayments.ru/#oplata-po-kriptogramme).
+Смотрите документацию по API: Платёж - [обработка 3-D Secure](https://developers.cloudpayments.ru/#obrabotka-3-d-secure).
 
 ### Подключение Google Pay  через CloudPayments
 
