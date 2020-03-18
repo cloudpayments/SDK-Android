@@ -2,6 +2,7 @@ package ru.cloudpayments.sdk.cp_card;
 
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
@@ -146,11 +147,12 @@ public class CPCard {
         }
 
         DateFormat format = new SimpleDateFormat("MMyy", Locale.ENGLISH);
+        format.setLenient(false);
         try {
             Date date = format.parse(expDate);
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(date);
-            calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+            calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
             date = calendar.getTime();
 
             Date currentDate = new Date();
