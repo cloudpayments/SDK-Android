@@ -16,7 +16,7 @@ CloudPayments SDK позволяет интегрировать прием пл�
 Для подключения CloudPayments SDK добавьте в файл build.gradle вашего проекта следующую зависимость:
 
 ```
-implementation 'ru.cloudpayments.android:sdk:1.0.5'
+implementation 'ru.cloudpayments.android:sdk:1.0.6'
 ```
 ### Структура проекта:
 
