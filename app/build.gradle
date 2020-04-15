@@ -2,11 +2,11 @@ apply plugin: 'com.android.application'
 
 android {
 
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "ru.cloudpayments.demo"
         minSdkVersion 19
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
     }
@@ -46,7 +46,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-wallet:18.0.0'
 
     // CloudPayments SDK
-    implementation 'ru.cloudpayments.android:sdk:1.0.6'
+    implementation 'ru.cloudpayments.android:sdk:1.0.7'
     //implementation project(path: ':sdk')
 
     // views binding
@@ -57,7 +57,7 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
 
     // rx
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.7'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.9'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
 
     // http

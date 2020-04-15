@@ -1,7 +1,6 @@
 package ru.cloudpayments.sdk.three_ds;
 
 import android.app.Activity;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +11,8 @@ import android.view.Window;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import androidx.fragment.app.DialogFragment;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;

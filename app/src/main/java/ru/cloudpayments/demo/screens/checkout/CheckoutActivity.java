@@ -313,7 +313,7 @@ public class CheckoutActivity extends BaseActivity implements ThreeDSDialogListe
         ThreeDsDialogFragment.newInstance(transaction.getAcsUrl(),
                 transaction.getId(),
                 transaction.getPaReq())
-                .show(getFragmentManager(), "3DS");
+                .show(getSupportFragmentManager(), "3DS");
     }
 
     // Завершаем транзакцию после прохождения 3DS формы
