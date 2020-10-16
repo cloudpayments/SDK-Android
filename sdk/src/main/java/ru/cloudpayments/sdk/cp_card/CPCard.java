@@ -223,6 +223,37 @@ public class CPCard {
         return crypto64;
     }
 
+    /**
+     * Генерим криптограму для CVV
+     * @param cardCvv
+     * @return
+     * @throws UnsupportedEncodingException
+     * @throws NoSuchPaddingException
+     * @throws NoSuchAlgorithmException
+     * @throws BadPaddingException
+     * @throws IllegalBlockSizeException
+     * @throws InvalidKeyException
+     */
+    public static String cardCryptogramForCVV(String cardCvv) throws UnsupportedEncodingException,
+            NoSuchPaddingException, NoSuchAlgorithmException, BadPaddingException,
+            IllegalBlockSizeException, InvalidKeyException {
+
+        byte[] bytes = cardCvv.getBytes("ASCII");
+        Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWithSHA1AndMGF1Padding");
+        SecureRandom random = new SecureRandom();
+        cipher.init(Cipher.ENCRYPT_MODE, getRSAKey(), random);
+        byte[] crypto = cipher.doFinal(bytes);
+        String crypto64 = "02" +
+                KEY_VERSION() +
+                Base64.encodeToString(crypto, Base64.DEFAULT);
+        String[] cr_array = crypto64.split("\n");
+        crypto64 = "";
+        for (int i = 0; i < cr_array.length; i++) {
+            crypto64 += cr_array[i];
+        }
+        return crypto64;
+    }
+
     private static String prepareCardNumber(String cardNumber) {
         return cardNumber.replaceAll("\\s", "");
     }
