@@ -243,7 +243,7 @@ public class CPCard {
         SecureRandom random = new SecureRandom();
         cipher.init(Cipher.ENCRYPT_MODE, getRSAKey(), random);
         byte[] crypto = cipher.doFinal(bytes);
-        String crypto64 = "02" +
+        String crypto64 = "03" +
                 KEY_VERSION() +
                 Base64.encodeToString(crypto, Base64.DEFAULT);
         String[] cr_array = crypto64.split("\n");
