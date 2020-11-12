@@ -207,11 +207,11 @@ public class CPCard {
         String exp = cardExp.substring(2, 4) + cardExp.substring(0, 2);
         String s = cardNumber + "@" + exp + "@" + cardCvv + "@" + publicId;
         byte[] bytes = s.getBytes("ASCII");
-        Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWithSHA1AndMGF1Padding");
+        Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
         SecureRandom random = new SecureRandom();
         cipher.init(Cipher.ENCRYPT_MODE, getRSAKey(), random);
         byte[] crypto = cipher.doFinal(bytes);
-        String crypto64 = "02" +
+        String crypto64 = "01" +
                 shortNumber +
                 exp + KEY_VERSION() +
                 Base64.encodeToString(crypto, Base64.DEFAULT);
@@ -239,7 +239,7 @@ public class CPCard {
             IllegalBlockSizeException, InvalidKeyException {
 
         byte[] bytes = cardCvv.getBytes("ASCII");
-        Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWithSHA1AndMGF1Padding");
+        Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
         SecureRandom random = new SecureRandom();
         cipher.init(Cipher.ENCRYPT_MODE, getRSAKey(), random);
         byte[] crypto = cipher.doFinal(bytes);
