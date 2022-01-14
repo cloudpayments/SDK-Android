@@ -52,7 +52,7 @@ public class CPCardApi {
         firstSixDigits = firstSixDigits.substring(0, 6);
 
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url ="https://widget.cloudpayments.ru/Home/BinInfo?firstSixDigits=" + firstSixDigits;
+        String url ="https://api.cloudpayments.ru/bins/info/" + firstSixDigits;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
